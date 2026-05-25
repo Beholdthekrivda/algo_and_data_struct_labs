@@ -48,7 +48,7 @@ private:
             root = newnode;
             return;
         }
-        
+
         parent = NULL;
         current = root;
 
@@ -73,7 +73,7 @@ private:
                 cout << "|"; cout << "_";
             }
         }
-         
+
         cout << node->val << " " << endl;
 
         print_recursive(node->left, level + 1);
@@ -85,7 +85,7 @@ private:
         if (node == NULL) return;
 
         if (node->val > left) get_vector_private(node->left, left, right, v);
-        
+
         if (node->val >= left && node->val <= right) v.push_back(node->val);
 
         if (node->val < right) get_vector_private(node->right, left, right, v);
@@ -144,7 +144,7 @@ public:
     void print()
     {
         print_recursive(root, 0);
-        cout << endl; 
+        cout << endl;
     }
 
     void get_vector(int left, int right, vector<int> &v)
@@ -197,7 +197,7 @@ public:
             parent = current; current = current->left;
             while (current->right != NULL)
             {
-                parent = current; 
+                parent = current;
                 current = current->right;
             }
             // после цикла current максимальное значение левого поддерева корня
@@ -221,7 +221,7 @@ public:
         clear(root);
         root = NULL;
         sort(arr, arr + n);
-        
+
         build_opt_tree_private(arr, 0, n - 1);
         cout << "root: " << root->val << endl;
     }
@@ -250,30 +250,30 @@ public:
     }
 };
 
-void test_basics() 
+void test_basics()
 {
     Tree t;
     t.add(10);
     t.add(10); // не должно добавиться
     t.add(5);
     t.add(15);
-    
+
     cout << "Ожидаемый вывод (5 10 15): " <<endl;
-    t.print(); 
-    
+    t.print();
+
     cout << "Поиск 10: " << (t.search(10) ? "Найдено" : "Нет") << endl;
     cout << "Поиск 100: " << (t.search(100) ? "Найдено" : "Нет") << endl;
 }
 
-void test_range() 
+void test_range()
 {
     Tree t;
     int arr[] = {20, 10, 30, 5, 15, 25, 35};
     t.add(arr, 7);
-    
+
     vector<int> res;
     t.get_vector(10, 25, res); // Ожидаем: 10, 15, 20, 25
-    
+
     cout << "Элементы в диапазоне [10, 25]: ";
     for(int val : res) cout << val << " ";
     cout << endl;
@@ -288,30 +288,30 @@ void test_efficiency()
     Tree t_normal;
     t_normal.build_tree(arr, n);
     cout << "Обычное дерево (из отсортированного массива):" << endl;
-    t_normal.find_max_avg_level(); 
+    t_normal.find_max_avg_level();
     cout << endl;
 
     Tree t_opt;
     t_opt.build_opt_tree(arr, n);
     cout << "Оптимальное дерево:" << endl;
     t_opt.find_max_avg_level();
-    
+
     delete[] arr;
 }
 
-void test_levels() 
+void test_levels()
 {
     Tree t;
-    t.add(10); 
-    t.add(5);  
+    t.add(10);
+    t.add(5);
     t.add(15);
-    
+
     cout << "Уровень узла 15: " << t.get_level(15) << " (ожидаем 2)" << endl;
     t.find_max_avg_level(); // Max: 2, Avg: (1+2+2)/3 = 1.66
 }
 
 int main()
-{	
+{
     srand(time(NULL));
 
     int n = 10;
@@ -321,7 +321,7 @@ int main()
     {
         arr[i] = i + 1;
     }
-    
+
     Tree tree;
 
     tree.build_opt_tree(arr, n);
